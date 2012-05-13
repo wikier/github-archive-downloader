@@ -1,7 +1,7 @@
 GitHub Archive Downloader
 =========================
 
-scripts to retrieve the full GitHub archive
+scripts to retrieve the full [![GitHub archive](http://www.githubarchive.org/)]
 
 Author
 ------
