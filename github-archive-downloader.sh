@@ -1,8 +1,16 @@
 #!/bin/sh
 
-COMMAND="wget"
+WGET="wget -t 0 -N"
+OUTPUT="archive"
+GZIP="gzip -d"
 BASE="http://data.githubarchive.org"
 EXTENSION="json.gz"
+
+mkdir -p $OUTPUT
+
+download() {
+    $WGET -P $OUTPUT $BASE/$1-$2-$3.$EXTENSION
+}
 
 DEFAULT_STARTS="2012-03-11"
 DEFAULT_ENDS=$(date +%Y-%m-%d)
@@ -46,20 +54,20 @@ ENDS_DAY=`echo $ENDS | awk -F- '{print $3}'`
 
 for YEAR in $(seq $STARTS_YEAR $ENDS_YEAR);
 do
-    for DAY in $(seq $STARTS_DAY 30); #FIXME
+    for DAY in $(seq $STARTS_DAY 30); #FIXME: will fail when the archive has more years
     do
-        echo "$BASE/$YEAR-$STARTS_MONTH-$DAY.$EXTENSION"
+        download $YEAR $STARTS_MONTH $DAY
     done
     for MONTH in $(seq $((STARTS_MONTH+1)) $((ENDS_MONTH-1)));
     do
-        for DAY in $(seq 1 30); #FIXME
+        for DAY in $(seq 1 30); #FIXME: months with 31
         do
-            echo "$BASE/$YEAR-$MONTH-$DAY.$EXTENSION"
+            download $YEAR $MONTH $DAY
         done
     done
-    for DAY in $(seq 1 $ENDS_DAY); #FIXME
+    for DAY in $(seq 1 $ENDS_DAY); #FIXME: will fail when the archive has more years
     do
-        echo "$BASE/$YEAR-$ENDS_MONTH-$DAY.$EXTENSION"
+        download $YEAR $ENDS_MONTH $DAY
     done
 done 
 
