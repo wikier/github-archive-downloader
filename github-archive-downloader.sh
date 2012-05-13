@@ -26,17 +26,8 @@ else
 fi
 echo "Seting ending date to $ENDS"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+if [ $ENDS > $STARTS ]; then
+    echo "invalid range of dates!"
+    exit
+fi
 
