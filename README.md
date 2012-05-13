@@ -6,7 +6,7 @@ scripts to retrieve the full [GitHub archive](http://www.githubarchive.org/)
 Author
 ------
 
-* Sergio Fernández <sergio@wikier.org>
+* [Sergio Fernández](http://www.wikier.org) (<sergio@wikier.org>)
 
 
 Usage
