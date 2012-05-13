@@ -26,8 +26,9 @@ else
 fi
 echo "Seting ending date to $ENDS"
 
-if [ $ENDS > $STARTS ]; then
+if [ $(date -d "$ENDS 01") < $(date -d "$STARTS 01") ]; then
     echo "invalid range of dates!"
     exit
 fi
+
 
