@@ -71,3 +71,5 @@ do
     done
 done 
 
+$GZIP $OUTPUT/*.$EXTENSION
+
