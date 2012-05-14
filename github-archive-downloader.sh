@@ -36,7 +36,8 @@ download() {
     else
         D="$3"
     fi
-    $WGET -P $OUTPUT $BASE/$Y-$M-$D.$EXTENSION
+    H=$4
+    $WGET -P $OUTPUT $BASE/$Y-$M-$D-$H.$EXTENSION
 }
 
 DEFAULT_STARTS="2012-03-11"
@@ -83,18 +84,27 @@ for YEAR in $(seq $STARTS_YEAR $ENDS_YEAR);
 do
     for DAY in $(seq $STARTS_DAY 30); #FIXME: will fail when the archive has more years
     do
-        download $YEAR $STARTS_MONTH $DAY
+        for HOUR in $(seq 0 23);
+        do
+            download $YEAR $STARTS_MONTH $DAY $HOUR
+        done
     done
     for MONTH in $(seq $((STARTS_MONTH+1)) $((ENDS_MONTH-1)));
     do
         for DAY in $(seq 1 30); #FIXME: months with 31
         do
-            download $YEAR $MONTH $DAY
+            for HOUR in $(seq 0 23);
+            do
+                download $YEAR $MONTH $DAY $HOUR
+            done
         done
     done
     for DAY in $(seq 1 $ENDS_DAY); #FIXME: will fail when the archive has more years
     do
-        download $YEAR $ENDS_MONTH $DAY
+        for HOUR in $(seq 0 23);
+        do
+            download $YEAR $ENDS_MONTH $DAY $HOUR
+        done
     done
 done 
 
