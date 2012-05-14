@@ -23,7 +23,20 @@ EXTENSION="json.gz"
 mkdir -p $OUTPUT
 
 download() {
-    $WGET -P $OUTPUT $BASE/$1-$2-$3.$EXTENSION
+    Y=$1
+    if [ ${#2} -lt 2 ];
+    then
+        M="0$2"
+    else
+        M="$2"
+    fi
+    if [ ${#3} -lt 2 ];
+    then
+        D="0$3"
+    else
+        D="$3"
+    fi
+    $WGET -P $OUTPUT $BASE/$Y-$M-$D.$EXTENSION
 }
 
 DEFAULT_STARTS="2012-03-11"
